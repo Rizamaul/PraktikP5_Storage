@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Praktikum Pertemuan 5"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="match_parent"
+        android:layout_height="104dp"
+        android:hint="Masukkan Nama (SharedPrefs)" />
+
+    <EditText
+        android:id="@+id/etJournalTitle"
+        android:layout_width="match_parent"
+        android:layout_height="98dp"
+        android:hint="Judul Jurnal" />
+
+    <EditText
+        android:id="@+id/etJournalContent"
+        android:layout_width="match_parent"
+        android:layout_height="154dp"
+        android:hint="Isi Jurnal"
+        android:lines="3" />
+
+    <Button
+        android:id="@+id/btnSaveAll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Simpan Semua Data" />
+
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:layout_marginTop="20dp"
+        android:text="Status: Menunggu aksi..." />
+
+</LinearLayout>
