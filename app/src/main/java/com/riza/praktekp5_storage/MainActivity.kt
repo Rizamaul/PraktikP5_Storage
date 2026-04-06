@@ -3,8 +3,6 @@ package com.riza.praktekp5_storage
 import android.content.Context
 import android.os.Bundle
 import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
@@ -13,34 +11,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val etUsername = findViewById<EditText>(R.id.etUsername)
-        val etJournalTitle = findViewById<EditText>(R.id.etJournalTitle)
-        val etJournalContent = findViewById<EditText>(R.id.etJournalContent)
-        val btnSaveAll = findViewById<Button>(R.id.btnSaveAll)
-        val tvStatus = findViewById<TextView>(R.id.tvStatus)
+        val btnSimulasiPinjam = findViewById<Button>(R.id.btnSimulasiPinjam)
+        val dbHelper = DatabaseHelper(this)
 
-        val journalManager = JournalManager(this)
+        btnSimulasiPinjam.setOnClickListener {
+            // Simulasi meminjam Buku ID 1 oleh Anggota ID 1 [cite: 597]
+            val berhasil = dbHelper.prosesPeminjaman(1, 1)
 
-        btnSaveAll.setOnClickListener {
-            val user = etUsername.text.toString()
-            val title = etJournalTitle.text.toString()
-            val content = etJournalContent.text.toString()
-
-            if (user.isNotEmpty() && title.isNotEmpty()) {
-                val prefs = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
-                prefs.edit().putString("username", user).apply()
-
-                journalManager.saveEntry(title, content)
-
-                tvStatus.text = "Status: Data Berhasil Disimpan!"
-                Toast.makeText(this, "Berhasil!", Toast.LENGTH_SHORT).show()
+            if (berhasil) {
+                Toast.makeText(this, "Peminjaman Berhasil & Stok Berkurang!", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Isi kolom yang kosong!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Gagal! Periksa stok atau data database.", Toast.LENGTH_SHORT).show()
             }
         }
-
-        val savedUser = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
-            .getString("username", "")
-        etUsername.setText(savedUser)
     }
 }
